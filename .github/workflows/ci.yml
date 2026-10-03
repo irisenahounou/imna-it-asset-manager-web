@@ -1,0 +1,38 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  tests:
+    name: Tests automatisés
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Récupération du code
+        uses: actions/checkout@v4
+
+      - name: Installation de PHP 8.3
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          extensions: mbstring, pdo_sqlite, sqlite3, bcmath, intl
+          coverage: none
+
+      - name: Installation des dépendances Composer
+        run: composer install --prefer-dist --no-progress --no-interaction
+
+      - name: Préparation de l'environnement de test
+        run: |
+          cp .env.example .env
+          php artisan key:generate
+
+      - name: Vérification du style de code (Pint)
+        run: vendor/bin/pint --test
+        continue-on-error: true
+
+      - name: Exécution des tests automatisés
+        run: php artisan test
