@@ -6,6 +6,17 @@
         <div class="card shadow-sm">
             <div class="card-header bg-primary text-white text-center fw-bold">Connexion - IMNA</div>
             <div class="card-body">
+
+@if ($errors->any())
+    <div class="alert alert-danger" role="alert">
+        <ul class="mb-0">
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
                 <form action="{{ route('login.post') }}" method="POST">
                     @csrf
                     <div class="mb-3">
