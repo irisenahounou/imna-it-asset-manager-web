@@ -22,7 +22,7 @@ class EmployeController extends Controller
         // Récupération basée sur user_id
         $mesPannes = Panne::where('user_id', $employeId)
             ->with('materiel')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('date_declaration', 'desc')
             ->get();
 
         return view('employe.dashboard', compact('materiels', 'mesPannes'));
