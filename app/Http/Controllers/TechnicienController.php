@@ -76,7 +76,7 @@ class TechnicienController extends Controller
     $panne = null;
 
     \Illuminate\Support\Facades\DB::transaction(function () use (
-        $id, $data, $produitsDemandes, &$panne
+        $id, $data, $produitsDemandes, &$panne, $request
     ) {
         $reparation = Reparation::whereKey($id)->lockForUpdate()->firstOrFail();
         // Décrémentation du stock et attachement du champ quantite_utilisee en table pivot
