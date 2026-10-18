@@ -95,7 +95,7 @@
                                             <select name="produits[0][id]" class="form-select form-select-sm">
                                                 <option value="">-- Aucune pièce --</option>
                                                 @foreach($produits as $prod)
-                                                    <option value="{{ $prod->id }}">{{ $prod->nom_composant }} (Dispo: {{ $prod->quantite_stock }})</option>
+                                                    <option value="{{ $prod->id_composant }}">{{ $prod->nom_composant }} (Dispo: {{ $prod->quantite_stock }})</option>
                                                 @endforeach
                                             </select>
                                         </div>
